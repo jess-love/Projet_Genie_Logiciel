@@ -1,5 +1,6 @@
 package gestion_cde_repas;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +10,16 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class LOGIN extends javax.swing.JFrame {
+    
     CONNECTION conn=new CONNECTION();
     Statement stm;
     ResultSet Rs;
     DefaultTableModel model=new DefaultTableModel();
    
     public LOGIN() {
-        initComponents();  
+       initComponents();
+       setIconImage();
+       this.setLocationRelativeTo(null);
      
       
     }
@@ -176,14 +180,15 @@ public class LOGIN extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         try
         {
            String a= username.getText();
            String b= pass.getText();
-//           DATA_SOURCES d= new DATA_SOURCES();
-//           d.login(a,b); 
+    //           DATA_SOURCES d= new DATA_SOURCES();
+    //          d.login(a,b); 
            
-             String query="Select * From connexion Where username='"+a+"' And password='"+b+"' ";
+            String query="Select * From connexion Where username='"+a+"' And password='"+b+"' ";
             PreparedStatement ps = conn.avoirconnection().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             if(rs.next())
@@ -257,4 +262,13 @@ public class LOGIN extends javax.swing.JFrame {
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
+
+        private void setIconImage() {
+      try{
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
+      } catch(Exception e)
+                {
+                     System.err.println(e);
+                }
+    }
 }

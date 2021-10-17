@@ -25,7 +25,7 @@ public class DATA_SOURCES {
             ResultSet rs = ps.executeQuery();
             if(rs.next())
             {
-                setVisible(false);
+              //  setVisible(false);
                 MENU Info;
                 Info = new MENU();
                 Info.setVisible(true);
