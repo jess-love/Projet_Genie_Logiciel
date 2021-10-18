@@ -1,4 +1,5 @@
 package gestion_cde_repas;
+import gestion_cde_repas.model.CONNECTION;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
