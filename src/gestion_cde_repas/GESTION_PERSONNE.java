@@ -338,7 +338,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
        try
         {
             if(nom.getText().length()==0 && prenom.getText().length()==0 && 
-              adr.getText().length()==0 && supprimer.getText().length()==0 )
+              adr.getText().length()==0 && tlf.getText().length()==0 )
             {
                 JOptionPane.showMessageDialog(null,"Veuillez remplir tous les champs SVP!");
             } 
@@ -416,7 +416,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             }
             if(model.getRowCount()==0)
             {
-                JOptionPane.showMessageDialog(null, "Il y a aucune personne correspondant dans le tableau stock");
+                JOptionPane.showMessageDialog(null, "Il y a aucune personne correspondant dans le tableau ");
             }
             
             else
@@ -455,7 +455,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         else
            {
  
-            if(JOptionPane.showConfirmDialog(null, "Attention! Voulez-vous vraiment supprimer cete personne?", "Suppimer personne", JOptionPane.YES_NO_OPTION)==JOptionPane.OK_OPTION)
+            if(JOptionPane.showConfirmDialog(null, "Attention! Voulez-vous vraiment supprimer cette personne?", "Suppimer personne", JOptionPane.YES_NO_OPTION)==JOptionPane.OK_OPTION)
             
             {
                 

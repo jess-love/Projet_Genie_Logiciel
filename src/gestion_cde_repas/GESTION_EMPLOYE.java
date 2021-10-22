@@ -2,8 +2,10 @@ package gestion_cde_repas;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -18,13 +20,20 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         setIconImage();
         this.setLocationRelativeTo(null);
         Fillcombo_2();
+    
     }
-
+//          private String getWord(String txt)
+//     {
+//        int index=txt.indexOf(" ");
+//        if(index)
+//     }
+     
+   
 
     @SuppressWarnings("unchecked")
      private void Fillcombo_2() //pour reccuperer la famille de l'article dans la table familleart et le mettre dans la liste item
     {
-              try
+        try
             {
                  String mysql="select nom, prenom from personne";
                  PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
@@ -37,13 +46,19 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
           
                  }
             }
-               catch(Exception e)
+        catch(Exception e)
        {
         System.err.println(e);
        }
-              
-              
+                       
     }
+     
+   
+     //****************************************************************************************************
+  
+         
+     
+     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -59,9 +74,9 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         dip = new javax.swing.JTextField();
-        post = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        post = new javax.swing.JComboBox<>();
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 153));
@@ -86,6 +101,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
 
         nom_prenom_emp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         nom_prenom_emp.setForeground(new java.awt.Color(0, 0, 102));
+        nom_prenom_emp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 153)));
         nom_prenom_emp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nom_prenom_empActionPerformed(evt);
@@ -118,16 +134,6 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         });
         jPanel1.add(dip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 270, 30));
 
-        post.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        post.setForeground(new java.awt.Color(51, 0, 102));
-        post.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 153), new java.awt.Color(51, 0, 153), null));
-        post.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postActionPerformed(evt);
-            }
-        });
-        jPanel1.add(post, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 270, 30));
-
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(51, 0, 102));
@@ -150,6 +156,12 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 110, 30));
 
+        post.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        post.setForeground(new java.awt.Color(51, 0, 153));
+        post.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manager", "Serveur", "Cuisinier", "Securite", " " }));
+        post.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 102)));
+        jPanel1.add(post, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 270, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 260));
 
         pack();
@@ -166,25 +178,73 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
     }//GEN-LAST:event_nom_prenom_empActionPerformed
 
     private void dipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dipActionPerformed
-//       diplome.add(dip.getText());
-//       System.out.println(diplome.get(diplome.size()-1));
+
     }//GEN-LAST:event_dipActionPerformed
 
-    private void postActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_postActionPerformed
-
     private void dipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dipMouseClicked
-       diplome.add(dip.getText());
-       System.out.println(diplome.get(diplome.size()-1));
+       
     }//GEN-LAST:event_dipMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       
+        try
+        {       String txt= nom_prenom_emp.getSelectedItem().toString();
+                int index=txt.indexOf(" ");
+                String a= txt.substring(0,index);    System.out.println(a);
+                String b= txt.substring(index+1);    System.out.println(b);
+                 
+                
+                stm=conn.avoirconnection().createStatement();
+                ResultSet Rs = stm.executeQuery("select id_pers from personne Where nom='"+a+"' And prenom='"+b+"' "); //
+                Rs.next();
+                int id=  Rs.getInt("id_pers"); System.out.println(id);
+                
+                   String sql = "insert into employe(id_pers, poste) VALUES (?,?)";
+                   PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+                   ps.setInt(1,id);
+                   ps.setString(2,post.getSelectedItem().toString());
+                   ps.execute();
+                   JOptionPane.showMessageDialog(null,"Cet employe a bien ete ajoute");
+          
+
+                   
+                  
+            for (int i=0; i<diplome.size(); i++)
+                {
+                    String pf ="select id_emp from employe ";
+                    Rs= stm.executeQuery(pf);
+                    Rs.last();
+                    int idi=  Rs.getInt("id_emp"); System.out.println(idi);
+                  
+                   
+                   String sqll = "insert into diplome(id_emp, libelle) VALUES (?,?)";
+                   PreparedStatement pst = conn.avoirconnection().prepareStatement(sqll);
+                   pst.setInt(1,idi);
+                   pst.setString(2,diplome.get(i).toString());
+                   pst.execute();
+                  
+                    
+                }
+        }
+            catch(SQLException e  )
+        {
+            System.err.println(e);
+            JOptionPane.showMessageDialog(null,e.getMessage());
+         }
+            
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-    
+     try
+     {  
+            diplome.add(dip.getText());
+            System.out.println(diplome.get(diplome.size()-1));
+            
+     }
+        catch(Exception e )
+        {
+            System.err.println(e);
+            JOptionPane.showMessageDialog(null,e.getMessage());
+         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     public static void main(String args[]) {
@@ -213,7 +273,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JComboBox<String> nom_prenom_emp;
-    private javax.swing.JTextField post;
+    private javax.swing.JComboBox<String> post;
     // End of variables declaration//GEN-END:variables
 
          private void setIconImage() {
