@@ -3,29 +3,24 @@ package gestion_cde_repas.model;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CLIENT extends PERSONNE {
-    private int id_clt;
+public class Viticulteur {
+    private int id_vit;
 
-    public CLIENT() { }
-
-    public CLIENT(int id_pers, String nom, String prenom, String adresse, String telephone, int id_clt) {
-        super(id_pers, nom, prenom, adresse, telephone);
-        this.id_clt = id_clt;
-    }
+    public Viticulteur() { }
 
     public int getId_clt() {
-        return id_clt;
+        return id_vit;
     }
 
     public void setId_clt(int id_clt) {
-        this.id_clt = id_clt;
+        this.id_vit = id_clt;
     }
 
     public static long insert(long id) throws SQLException {
-        CONNECTION conn=new CONNECTION();
+        CONNECTION conn = new CONNECTION();
 
         String sql;
-        sql = "insert into client(id_pers) VALUES (?)";
+        sql = "insert into Viticulteur(id_pers) VALUES (?)";
         PreparedStatement pt = conn.avoirconnection().prepareStatement(sql);
 
         pt.setLong(1,id);
@@ -36,4 +31,3 @@ public class CLIENT extends PERSONNE {
         return gen_id;
     }
 }
-

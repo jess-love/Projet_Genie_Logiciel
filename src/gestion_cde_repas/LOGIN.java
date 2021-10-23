@@ -1,4 +1,6 @@
 package gestion_cde_repas;
+import gestion_cde_repas.model.CONNECTION;
+import gestion_cde_repas.model.User;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
@@ -181,34 +183,21 @@ public class LOGIN extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        try
-        {
-           String a= username.getText();
-           String b= pass.getText();
-    //           DATA_SOURCES d= new DATA_SOURCES();
-    //          d.login(a,b); 
+        String _username = username.getText();
+        String _password = pass.getText();
            
-            String query="Select * From connexion Where username='"+a+"' And password='"+b+"' ";
-            PreparedStatement ps = conn.avoirconnection().prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next())
-            {
-                setVisible(false);
-                MENU Info;
-                Info = new MENU();
-                Info.setVisible(true);
-
-            } else
-
-            {
-                JOptionPane.showMessageDialog(null, " Username Or Password are Invalid ");
-            }    
-        }
-
-        catch(SQLException | HeadlessException e)
+        boolean checked = User.chekUser(_username, _password);
+    
+        if(checked)
         {
-            System.err.println(e);
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            setVisible(false);
+            MENU Info;
+            Info = new MENU();
+            Info.setVisible(true);
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null, " Username Or Password are Invalid ");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

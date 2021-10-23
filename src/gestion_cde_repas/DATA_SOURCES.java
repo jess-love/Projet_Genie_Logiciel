@@ -1,4 +1,5 @@
 package gestion_cde_repas;
+import gestion_cde_repas.model.CONNECTION;
 import static com.sun.glass.ui.Cursor.setVisible;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ public class DATA_SOURCES {
             PreparedStatement ps = conn.avoirconnection().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             if(rs.next())
-            {
+            {SQLException | HeadlessException e
               //  setVisible(false);
                 MENU Info;
                 Info = new MENU();

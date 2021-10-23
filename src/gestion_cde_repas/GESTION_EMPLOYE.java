@@ -1,16 +1,21 @@
 package gestion_cde_repas;
+import gestion_cde_repas.model.CONNECTION;
+import gestion_cde_repas.model.DIPLOME;
+import gestion_cde_repas.model.Employe;
+import gestion_cde_repas.model.PERSONNE;
+
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class GESTION_EMPLOYE extends javax.swing.JFrame {
-    CONNECTION conn=new CONNECTION();
+    CONNECTION conn = new CONNECTION();
     Statement stm;
     ResultSet Rs;
     DefaultTableModel model=new DefaultTableModel();
@@ -22,41 +27,33 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         Fillcombo_2();
     
     }
-//          private String getWord(String txt)
-//     {
-//        int index=txt.indexOf(" ");
-//        if(index)
-//     }
-     
-   
+    //     private String getWord(String txt)
+    //     {
+    //        int index=txt.indexOf(" ");
+    //        if(index)
+    //     }
 
-    @SuppressWarnings("unchecked")
-     private void Fillcombo_2() //pour reccuperer la famille de l'article dans la table familleart et le mettre dans la liste item
-    {
-        try
-            {
-                 String mysql="select nom, prenom from personne";
-                 PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
-                 ResultSet rs2 = pst.executeQuery();
-                 while(rs2.next())
-                 {
-                     String famiy2=rs2.getString("nom") + " " +rs2.getString("prenom");
-                     
-                     nom_prenom_emp.addItem(famiy2);
-          
-                 }
-            }
-        catch(Exception e)
-       {
-        System.err.println(e);
-       }
-                       
-    }
+        @SuppressWarnings("unchecked")
+        private void Fillcombo_2() //pour reccuperer la famille de l'article dans la table familleart et le mettre dans la liste item
+        {
+            try
+                {
+                    List<PERSONNE> personnes = PERSONNE.getNames();
+
+                    personnes.forEach(personne -> {
+                        String fullName = personne.getNom() + " " +personne.getPrenom();
+                        nom_prenom_emp.addItem(fullName);
+                    });
+                }
+            catch(Exception e)
+           {
+            System.err.println(e);
+           }
+
+        }
      
    
      //****************************************************************************************************
-  
-         
      
      
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -187,63 +184,41 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try
-        {       String txt= nom_prenom_emp.getSelectedItem().toString();
-                int index=txt.indexOf(" ");
-                String a= txt.substring(0,index);    System.out.println(a);
-                String b= txt.substring(index+1);    System.out.println(b);
-                 
-                
-                stm=conn.avoirconnection().createStatement();
-                ResultSet Rs = stm.executeQuery("select id_pers from personne Where nom='"+a+"' And prenom='"+b+"' "); //
-                Rs.next();
-                int id=  Rs.getInt("id_pers"); System.out.println(id);
-                
-                   String sql = "insert into employe(id_pers, poste) VALUES (?,?)";
-                   PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
-                   ps.setInt(1,id);
-                   ps.setString(2,post.getSelectedItem().toString());
-                   ps.execute();
-                   JOptionPane.showMessageDialog(null,"Cet employe a bien ete ajoute");
-          
+        {
+            String txt= nom_prenom_emp.getSelectedItem().toString();
+            int index=txt.indexOf(" ");                                         //bout sa yo ou a deside si w toujou bzw yo
+            String a= txt.substring(0,index);    System.out.println(a);
+            String b= txt.substring(index+1);    System.out.println(b);
 
-                   
+            long id_pers = 76; //(quelconque)  id wap recuperer an, pou moun ki selectionné an
+                
+            Long id_emp = Employe.insert(id_pers, post.getSelectedItem().toString());
+
+            JOptionPane.showMessageDialog(null,"Cet employe a bien ete ajoute");
                   
             for (int i=0; i<diplome.size(); i++)
-                {
-                    String pf ="select id_emp from employe ";
-                    Rs= stm.executeQuery(pf);
-                    Rs.last();
-                    int idi=  Rs.getInt("id_emp"); System.out.println(idi);
-                  
-                   
-                   String sqll = "insert into diplome(id_emp, libelle) VALUES (?,?)";
-                   PreparedStatement pst = conn.avoirconnection().prepareStatement(sqll);
-                   pst.setInt(1,idi);
-                   pst.setString(2,diplome.get(i).toString());
-                   pst.execute();
-                  
-                    
-                }
+            {
+                DIPLOME.insert(id_emp, diplome.get(i).toString());
+            }
         }
-            catch(SQLException e  )
+        catch(SQLException e)
         {
             System.err.println(e);
             JOptionPane.showMessageDialog(null,e.getMessage());
-         }
+        }
             
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-     try
-     {  
-            diplome.add(dip.getText());
-            System.out.println(diplome.get(diplome.size()-1));
-            
-     }
-        catch(Exception e )
-        {
-            System.err.println(e);
-            JOptionPane.showMessageDialog(null,e.getMessage());
+         try
+         {
+             diplome.add(dip.getText());
+             System.out.println(diplome.get(diplome.size()-1));
+         }
+         catch(Exception e )
+         {
+             System.err.println(e);
+             JOptionPane.showMessageDialog(null,e.getMessage());
          }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -253,9 +228,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
             new GESTION_EMPLOYE().setVisible(true);
         });
     }
-    
-    
-    
+
     public static ArrayList diplome= new ArrayList <String> ();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,12 +249,12 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> post;
     // End of variables declaration//GEN-END:variables
 
-         private void setIconImage() {
+    private void setIconImage() {
       try{
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
       } catch(Exception e)
-                {
-                     System.err.println(e);
-                }
+      {
+          System.err.println(e);
+      }
     }
 }
