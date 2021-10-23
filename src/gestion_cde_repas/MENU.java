@@ -239,7 +239,7 @@ public class MENU extends javax.swing.JFrame {
     private void tab_menu_restoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_menu_restoMouseClicked
         int i;
         i = tab_menu_resto.getSelectedRow();
-        deplace(i);
+      //  deplace(i);
     }//GEN-LAST:event_tab_menu_restoMouseClicked
 
     public static void main(String args[]) {
