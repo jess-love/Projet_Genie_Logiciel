@@ -1,4 +1,4 @@
-package gestion_cde_repas;
+package gestion_cde_repas.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,7 +32,7 @@ public class CONNECTION {
 
     }
     
-    Connection avoirconnection()
+    public Connection avoirconnection()
     {
         return conn;
     
