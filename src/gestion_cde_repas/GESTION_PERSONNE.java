@@ -37,7 +37,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
        
         try
         {
-            List<PERSONNE> personnes = PERSONNE.getAll();
+            List<PERSONNE> personnes = PERSONNE.getAllOrderById();
 
             personnes.forEach(personne -> {
                 model.addRow(new Object[] {
@@ -48,8 +48,6 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                         personne.getTelephone()
                 });
             });
-
-
         }
         catch(Exception e)
         {
@@ -69,7 +67,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         {
            model.setRowCount(0);
 
-            List<PERSONNE> personnes = PERSONNE.getAll();
+            List<PERSONNE> personnes = PERSONNE.getAllOrderById();
 
             personnes.forEach(personne -> {
                 model.addRow(new Object[] {
@@ -364,21 +362,21 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                 {
                     long id_pers = PERSONNE.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
-                        if(combo.getSelectedItem()=="Client")
-                        {
-                            CLIENT.insert(id_pers);
-                        }
-                        else if(combo.getSelectedItem()=="Viticulteur")
-                        {
-                            Viticulteur.insert(id_pers);
-                        }
-                        
-                        JOptionPane.showMessageDialog(null,"Cette personne a bien ete ajoute");
-                        nom.setText("");
-                        prenom.setText("");
-                        adr.getText();
-                        tlf.setText("");
-                        affiche();
+                    if(combo.getSelectedItem()=="Client")
+                    {
+                        CLIENT.insert(id_pers);
+                    }
+                    else if(combo.getSelectedItem()=="Viticulteur")
+                    {
+                        Viticulteur.insert(id_pers);
+                    }
+
+                    JOptionPane.showMessageDialog(null,"Cette personne a bien ete ajoute");
+                    nom.setText("");
+                    prenom.setText("");
+                    adr.getText();
+                    tlf.setText("");
+                    affiche();
                 }
 
         }
@@ -457,7 +455,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             
             {
                 
-                PERSONNE.delete(supprimer.getText());
+                PERSONNE.delete(Long.parseLong(supprimer.getText()));
                 affiche();
             }
             
@@ -482,7 +480,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
                 if(JOptionPane.showConfirmDialog(null,"Confirmer la modification", "Modification", JOptionPane.YES_NO_OPTION)== JOptionPane.OK_OPTION)
                 {
-                    int res = PERSONNE.update(supprimer.getText(), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
+                    int res = PERSONNE.update(Long.parseLong(supprimer.getText()), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
                     affiche();
                 }

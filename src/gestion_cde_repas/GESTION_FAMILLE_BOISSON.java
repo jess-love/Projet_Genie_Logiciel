@@ -1,11 +1,15 @@
 package gestion_cde_repas;
 
+import gestion_cde_repas.model.Famille_boisson;
+import gestion_cde_repas.model.PERSONNE;
+
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,19 +26,15 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         model.addColumn("Numero"); 
-        model.addColumn("Nom famille"); 
-        
+        model.addColumn("Nom famille");
 
-       
         try
         {
-           stm=conn.avoirconnection().createStatement();
-           ResultSet Rs = stm.executeQuery("Select * from famille_boisson Order by id_fam_boisson");   
-           while (Rs.next())
-           {
-               
-               model.addRow(new Object[] { Rs.getString("id_fam_boisson"), Rs.getString("nom_fam_boisson")});
-           }
+            List<Famille_boisson> famille_boissons = Famille_boisson.getAllOrderById();
+
+            famille_boissons.forEach(familleBoisson -> {
+                model.addRow(new Object[] { familleBoisson.getId_fam_boisson(), familleBoisson.getNom_fam_boisson() });
+            });
         }
         catch(Exception e)
         {
@@ -51,19 +51,15 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         try
         {
            model.setRowCount(0);
-           stm=conn.avoirconnection().createStatement();
-           ResultSet Rs = stm.executeQuery("Select * from famille_boisson Order by id_fam_boisson");   
-           while (Rs.next())
-           {
-               
-               model.addRow(new Object[] { Rs.getString("id_fam_boisson"), Rs.getString("nom_fam_boisson")});
-           }  
+            List<Famille_boisson> famille_boissons = Famille_boisson.getAllOrderById();
+
+            famille_boissons.forEach(familleBoisson -> {
+                model.addRow(new Object[] { familleBoisson.getId_fam_boisson(), familleBoisson.getNom_fam_boisson() });
+            });
            nom.setText("");
            rech.setText("");
            
-
-           
-        } catch(SQLException | HeadlessException e)
+        } catch(HeadlessException e)
         {
             System.err.println(e);
             JOptionPane.showMessageDialog(null,e.getMessage());
@@ -248,15 +244,13 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
             model.setRowCount(0);
             if(rech.getText().length()!=0)
             {
-                {
-                    Rs=stm.executeQuery("Select * From famille_boisson Where  CONCAT(nom_fam_boisson) LIKE '%' '"+rech.getText()+"' '%'");
-                }
-                while(Rs.next())
-                {
+                List<Famille_boisson> famille_boissons = Famille_boisson.search(rech.getText());
 
-                    Object[] etudiant= {Rs.getInt(1), Rs.getString(2)};
+                famille_boissons.forEach(familleBoisson -> {
+                    Object[] etudiant= { familleBoisson.getId_fam_boisson(), familleBoisson.getNom_fam_boisson() };
                     model.addRow(etudiant);
-                }
+                });
+
                 if(model.getRowCount()==0)
                 {
                     JOptionPane.showMessageDialog(null, "Il y a aucune famille de boisson correspondant dans le tableau");
@@ -297,13 +291,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
 
             else
             {
-                String sql;
-                sql = "insert into famille_boisson(nom_fam_boisson) VALUES (?)";
-                PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
-
-                ps.setString(1,nom.getText());
-                ps.execute();
-
+                Famille_boisson.insert(nom.getText());
                
                 JOptionPane.showMessageDialog(null,"Cette famille a bien ete ajoute");
                 nom.setText("");
@@ -331,10 +319,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
 
                 if(JOptionPane.showConfirmDialog(null,"Confirmer la modification", "Modification", JOptionPane.YES_NO_OPTION)== JOptionPane.OK_OPTION)
                 {
-
-                    String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom.getText()+"' WHERE id_fam_boisson= "+supprimer.getText() ;
-                    PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
-                    ps.execute();
+                    Famille_boisson.update(Long.parseLong(supprimer.getText()), nom.getText());
                     affiche();
                 }
             } }
@@ -352,12 +337,10 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
             {JOptionPane.showMessageDialog(null,"Veuillez rechercher l'element a supprimer dans le tableau et presser sur la ligne correspondante dans le tableau");}
             else
             {
-
                 if(JOptionPane.showConfirmDialog(null, "Attention! Voulez-vous vraiment supprimer cette famille?", "Suppimer personne", JOptionPane.YES_NO_OPTION)==JOptionPane.OK_OPTION)
 
                 {
-
-                    stm.executeUpdate("Delete From famille_boisson Where id_fam_boisson="+supprimer.getText());
+                    Famille_boisson.delete(Long.parseLong(supprimer.getText()));
                     affiche();
                 }
 

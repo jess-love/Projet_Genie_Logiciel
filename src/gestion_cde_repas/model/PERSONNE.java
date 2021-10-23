@@ -68,6 +68,40 @@ public class PERSONNE {
         try
         {
             stm=conn.avoirconnection().createStatement();
+            Rs = stm.executeQuery("Select * from personne");
+
+            List<PERSONNE> personnes = new ArrayList<>();
+
+            while (Rs.next())
+            {
+                PERSONNE personne = new PERSONNE();
+
+                personne.setId_pers(Rs.getInt("id_pers"));
+                personne.setNom(Rs.getString("nom"));
+                personne.setPrenom(Rs.getString("prenom"));
+                personne.setAdresse(Rs.getString("adresse"));
+                personne.setTelephone(Rs.getString("telephone"));
+
+                personnes.add(personne);
+            }
+
+            return personnes;
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+            return null;
+        }
+    }
+
+    public static List<PERSONNE> getAllOrderById(){
+        CONNECTION conn=new CONNECTION();
+        Statement stm;
+        ResultSet Rs;
+
+        try
+        {
+            stm=conn.avoirconnection().createStatement();
             Rs = stm.executeQuery("Select * from personne Order by id_pers");
 
             List<PERSONNE> personnes = new ArrayList<>();
@@ -81,6 +115,8 @@ public class PERSONNE {
                 personne.setPrenom(Rs.getString("prenom"));
                 personne.setAdresse(Rs.getString("adresse"));
                 personne.setTelephone(Rs.getString("telephone"));
+
+                personnes.add(personne);
             }
 
             return personnes;
@@ -128,12 +164,14 @@ public class PERSONNE {
             personne.setPrenom(Rs.getString("prenom"));
             personne.setAdresse(Rs.getString("adresse"));
             personne.setTelephone(Rs.getString("telephone"));
+
+            personnes.add(personne);
         }
 
         return personnes;
     }
 
-    public static int delete(String id_pers) throws SQLException {
+    public static int delete(long id_pers) throws SQLException {
         Statement stm = null;
 
         int res = stm.executeUpdate("Delete From personne Where id_pers="+id_pers);
@@ -141,7 +179,7 @@ public class PERSONNE {
         return res;
     }
 
-    public static int update(String id_pers, String nom, String prenom, String adresse, String telephone) throws SQLException {
+    public static int update(long id_pers, String nom, String prenom, String adresse, String telephone) throws SQLException {
         CONNECTION conn=new CONNECTION();
         ResultSet Rs;
 
@@ -150,5 +188,27 @@ public class PERSONNE {
         int res = ps.executeUpdate();
 
         return res;
+    }
+
+    public static List<PERSONNE> getNames() throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select id_pers, nom, prenom from personne";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        List<PERSONNE> personnes = new ArrayList<>();
+
+        while (Rs.next())
+        {
+            PERSONNE personne = new PERSONNE();
+
+            personne.setNom(Rs.getString("nom"));
+            personne.setPrenom(Rs.getString("prenom"));
+
+            personnes.add(personne);
+        }
+
+        return personnes;
     }
 }

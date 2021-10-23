@@ -17,7 +17,7 @@ public class Viticulteur {
     }
 
     public static long insert(long id) throws SQLException {
-        CONNECTION conn=new CONNECTION();
+        CONNECTION conn = new CONNECTION();
 
         String sql;
         sql = "insert into Viticulteur(id_pers) VALUES (?)";

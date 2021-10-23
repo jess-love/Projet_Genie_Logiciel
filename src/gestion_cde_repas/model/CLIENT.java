@@ -8,6 +8,11 @@ public class CLIENT extends PERSONNE {
 
     public CLIENT() { }
 
+    public CLIENT(int id_pers, String nom, String prenom, String adresse, String telephone, int id_clt) {
+        super(id_pers, nom, prenom, adresse, telephone);
+        this.id_clt = id_clt;
+    }
+
     public int getId_clt() {
         return id_clt;
     }
