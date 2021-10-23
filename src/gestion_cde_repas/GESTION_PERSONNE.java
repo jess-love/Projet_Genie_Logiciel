@@ -1,11 +1,16 @@
 package gestion_cde_repas;
+import gestion_cde_repas.model.CLIENT;
 import gestion_cde_repas.model.CONNECTION;
+import gestion_cde_repas.model.PERSONNE;
+import gestion_cde_repas.model.Viticulteur;
+
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,19 +32,24 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         model.addColumn("Nom");
         model.addColumn("Prenom");  
         model.addColumn("Adresse"); 
-        model.addColumn("Telephone"); 
-        
+        model.addColumn("Telephone");
 
        
         try
         {
-           stm=conn.avoirconnection().createStatement();
-           ResultSet Rs = stm.executeQuery("Select * from personne Order by id_pers");   //la nou pran eleman nan tab la nou mete yo nan tablo a
-           while (Rs.next())
-           {
-               
-               model.addRow(new Object[] { Rs.getString("id_pers"), Rs.getString("nom"), Rs.getString("prenom"), Rs.getString("adresse"),  Rs.getString("telephone")});
-           }
+            List<PERSONNE> personnes = PERSONNE.getAll();
+
+            personnes.forEach(personne -> {
+                model.addRow(new Object[] {
+                        personne.getId_pers(),
+                        personne.getNom(),
+                        personne.getPrenom(),
+                        personne.getAdresse(),
+                        personne.getTelephone()
+                });
+            });
+
+
         }
         catch(Exception e)
         {
@@ -58,19 +68,25 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         try
         {
            model.setRowCount(0);
-           stm=conn.avoirconnection().createStatement();
-           ResultSet Rs = stm.executeQuery("Select * from personne Order by id_pers");   //la nou pran eleman nan tab la nou mete yo nan tablo a
-           while (Rs.next())
-           {
-               
-               model.addRow(new Object[] { Rs.getString("id_pers"), Rs.getString("nom"), Rs.getString("prenom"), Rs.getString("adresse"),  Rs.getString("telephone")});
-               nom.setText("");
-               prenom.setText("");
-               adr.setText("");
-               tlf.setText("");
-           }
-           
-        } catch(SQLException | HeadlessException e)
+
+            List<PERSONNE> personnes = PERSONNE.getAll();
+
+            personnes.forEach(personne -> {
+                model.addRow(new Object[] {
+                        personne.getId_pers(),
+                        personne.getNom(),
+                        personne.getPrenom(),
+                        personne.getAdresse(),
+                        personne.getTelephone()
+                });
+
+                nom.setText("");
+                prenom.setText("");
+                adr.setText("");
+                tlf.setText("");
+            });
+
+        } catch(HeadlessException e)
         {
             System.err.println(e);
             JOptionPane.showMessageDialog(null,e.getMessage());
@@ -346,36 +362,15 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
          
             else
                 {
-                    String sql;
-                        sql = "insert into personne(nom, prenom, adresse, telephone) VALUES (?,?,?,?)";
-                        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+                    long id_pers = PERSONNE.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
-                        ps.setString(1,nom.getText());
-                        ps.setString(2,prenom.getText());
-                        ps.setString(3,adr.getText());
-                        ps.setString(4,tlf.getText());
-                        ps.execute();
-                        
-                        stm=conn.avoirconnection().createStatement();
-                        ResultSet Rs = stm.executeQuery("Select id_pers from personne Where nom='"+nom.getText()+"' And prenom= '"+prenom.getText()+"' And adresse= '"+adr.getText()+"' And telephone= '"+tlf.getText()+"' ");
-                        Rs.next();
-                        int id=  Rs.getInt("id_pers");
-                        
                         if(combo.getSelectedItem()=="Client")
                         {
-                            String sqll = "insert into client(id_pers) VALUES (?)";
-                            PreparedStatement pt = conn.avoirconnection().prepareStatement(sqll);
-                            
-                            pt.setInt(1,id);
-                            pt.execute();
+                            CLIENT.insert(id_pers);
                         }
                         else if(combo.getSelectedItem()=="Viticulteur")
                         {
-                            String sqll = "insert into Viticulteur(id_pers) VALUES (?)";
-                            PreparedStatement pt = conn.avoirconnection().prepareStatement(sqll);
-                            
-                            pt.setInt(1,id);
-                            pt.execute();
+                            Viticulteur.insert(id_pers);
                         }
                         
                         JOptionPane.showMessageDialog(null,"Cette personne a bien ete ajoute");
@@ -388,10 +383,6 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         }
 
-            
-       
-
-        
         catch(SQLException | HeadlessException e)
         {
             System.err.println(e);
@@ -406,15 +397,20 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             model.setRowCount(0); 
              if(rech.getText().length()!=0)
         {
-            {   
-                Rs=stm.executeQuery("Select * From personne Where  CONCAT(nom, prenom, adresse, telephone) LIKE '%' '"+rech.getText()+"' '%'");
-            }
-            while(Rs.next())
             {
+                List<PERSONNE> personnes = PERSONNE.search(rech.getText());
 
-                Object[] etudiant= {Rs.getInt(1), Rs.getString(2), Rs.getString(3), Rs.getString(4), Rs.getString(5)};
-                model.addRow(etudiant);
+                personnes.forEach(personne -> {
+                    model.addRow(new Object[] {
+                            personne.getId_pers(),
+                            personne.getNom(),
+                            personne.getPrenom(),
+                            personne.getAdresse(),
+                            personne.getTelephone()
+                    });
+                });
             }
+
             if(model.getRowCount()==0)
             {
                 JOptionPane.showMessageDialog(null, "Il y a aucune personne correspondant dans le tableau stock");
@@ -422,7 +418,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             
             else
             {
-                int i=0; deplace(i);
+                int i=0;
+                deplace(i);
             }
                  
         }
@@ -460,7 +457,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             
             {
                 
-                stm.executeUpdate("Delete From personne Where id_pers="+supprimer.getText());
+                PERSONNE.delete(supprimer.getText());
                 affiche();
             }
             
@@ -485,10 +482,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
                 if(JOptionPane.showConfirmDialog(null,"Confirmer la modification", "Modification", JOptionPane.YES_NO_OPTION)== JOptionPane.OK_OPTION)
                 {
+                    int res = PERSONNE.update(supprimer.getText(), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
-                    String sql = "UPDATE personne set nom= '"+nom.getText()+"', prenom= '"+prenom.getText()+"', adresse= '"+adr.getText()+"', telephone= '"+tlf.getText()+"'  WHERE id_pers= "+supprimer.getText() ;
-                    PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
-                    ps.execute();
                     affiche();
                 }
             } }

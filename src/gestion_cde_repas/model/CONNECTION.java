@@ -32,7 +32,7 @@ public class CONNECTION {
 
     }
     
-    Connection avoirconnection()
+    public Connection avoirconnection()
     {
         return conn;
     
