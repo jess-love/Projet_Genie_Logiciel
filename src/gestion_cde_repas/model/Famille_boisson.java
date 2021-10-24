@@ -74,10 +74,13 @@ public class Famille_boisson {
     }
 
     public static List<Famille_boisson> search(String keywords) throws SQLException {
-        Statement stm = null;
+        CONNECTION conn = new CONNECTION();
         ResultSet Rs;
+        String sql = "Select * From famille_boisson Where  CONCAT(nom_fam_boisson) LIKE '%' '"+keywords+"' '%'";
 
-        Rs=stm.executeQuery("Select * From famille_boisson Where  CONCAT(nom_fam_boisson) LIKE '%' '"+keywords+"' '%'");
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+
+        Rs = ps.executeQuery();
 
         List<Famille_boisson> famille_boissons = new ArrayList<>();
 
