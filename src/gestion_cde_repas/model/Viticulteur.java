@@ -1,6 +1,7 @@
 package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -27,8 +28,13 @@ public class Viticulteur {
         pt.setLong(1,id);
         pt.executeUpdate();
 
-        long gen_id = pt.getGeneratedKeys().getLong("id_pers");
-
-        return gen_id;
+        ResultSet generatedKeys = pt.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id_gen = generatedKeys.getLong(1);
+            
+            return id_gen;
+        }
+        
+        return 0;
     }
 }
