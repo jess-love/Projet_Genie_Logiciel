@@ -1,6 +1,7 @@
 package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -44,8 +45,13 @@ public class Employe extends PERSONNE{
 
         int res = ps.executeUpdate();
 
-        long id = ps.getGeneratedKeys().getLong("id_emp");
-
-        return id;
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 }

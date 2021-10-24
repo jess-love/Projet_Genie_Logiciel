@@ -142,9 +142,14 @@ public class PERSONNE {
 
         int res = ps.executeUpdate();
 
-        long id = ps.getGeneratedKeys().getLong("id_pers");
-
-        return id;
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 
     public static List<PERSONNE> search(String keywords) throws SQLException {

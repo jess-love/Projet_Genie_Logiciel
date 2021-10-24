@@ -1,6 +1,7 @@
 package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -27,14 +28,19 @@ public class CLIENT extends PERSONNE {
 
         String sql;
         sql = "insert into client(id_pers) VALUES (?)";
-        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        pt.setLong(1,id);
-        pt.executeUpdate();
+        ps.setLong(1,id);
+        ps.executeUpdate();
 
-        long gen_id = pt.getGeneratedKeys().getLong("id_pers");
-
-        return gen_id;
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id_gen = generatedKeys.getLong(1);
+            
+            return id_gen;
+        }
+        
+        return 0;
     }
 }
 

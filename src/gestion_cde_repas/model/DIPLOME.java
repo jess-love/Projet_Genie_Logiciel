@@ -1,6 +1,7 @@
 package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -43,8 +44,13 @@ public class DIPLOME {
 
         int res = pt.executeUpdate();
 
-        long gen_id = pt.getGeneratedKeys().getLong("id_pers");
-
-        return gen_id;
+        ResultSet generatedKeys = pt.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 }
