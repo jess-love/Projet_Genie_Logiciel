@@ -67,10 +67,13 @@ public class Famille_boisson {
     }
 
     public static List<Famille_boisson> search(String keywords) throws SQLException {
-        Statement stm = null;
+        CONNECTION conn = new CONNECTION();
         ResultSet Rs;
+        String sql = "Select * From famille_boisson Where  CONCAT(nom_fam_boisson) LIKE '%' '"+keywords+"' '%'";
 
-        Rs=stm.executeQuery("Select * From famille_boisson Where  CONCAT(nom_fam_boisson) LIKE '%' '"+keywords+"' '%'");
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+
+        Rs = ps.executeQuery();
 
         List<Famille_boisson> famille_boissons = new ArrayList<>();
 
@@ -97,33 +100,36 @@ public class Famille_boisson {
         ps.setString(1,nom);
 
         int res = ps.executeUpdate();
-
-        //int id = ps.getGeneratedKeys().getInt("id_fam_boisson");
-
-       // return id;
+        
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 
     public static void update(int id_fam, String nom) throws SQLException {
         CONNECTION conn=new CONNECTION();
-        //ResultSet Rs;
 
-        String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom+"'  WHERE id_fam_boisson= = "+id_fam;
+        String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom+"'  WHERE id_fam_boisson = "+id_fam;
         PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
         ps.executeUpdate();
 
         ///return res;
     }
 
-    public static void delete(int id_fam) throws SQLException {
-       // Statement stm = null;
+    public static int delete(long id_fam) throws SQLException {
         CONNECTION conn=new CONNECTION();
-        //ResultSet Rs;
-
-        //int res = stm.executeUpdate("Delete From famille_boisson Where id_fam_boisson="+id_fam);
-         
+        
         String sql = "Delete From famille_boisson Where id_fam_boisson="+id_fam;
-        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.executeUpdate();
-       // return res;
+
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+
+        int res = ps.executeUpdate();
+
+        return res;
     }
 }

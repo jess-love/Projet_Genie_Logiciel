@@ -1,6 +1,8 @@
 package gestion_cde_repas.model;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class diplome {
     private int id_dip;
@@ -34,15 +36,20 @@ public class diplome {
 
         String sql;
         sql = "insert into diplome(id_emp, libelle) VALUES (?,?)";
-        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pt.setLong(1,id_emp);
         pt.setString(2,libelle);
 
         int res = pt.executeUpdate();
 
-        long gen_id = pt.getGeneratedKeys().getLong("id_pers");
-
-        return gen_id;
+        ResultSet generatedKeys = pt.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 }

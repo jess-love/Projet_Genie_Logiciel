@@ -12,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
-    CONNECTION conn=new CONNECTION();
-    Statement stm;
-    ResultSet Rs;
     DefaultTableModel model=new DefaultTableModel();
 
     public GESTION_FAMILLE_BOISSON() {

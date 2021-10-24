@@ -133,7 +133,7 @@ public class personne {
 
         String sql;
         sql = "insert into personne(nom, prenom, adresse, telephone) VALUES (?,?,?,?)";
-        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         ps.setString(1,nom);
         ps.setString(2,prenom);
@@ -142,18 +142,26 @@ public class personne {
 
         int res = ps.executeUpdate();
 
-        long id = ps.getGeneratedKeys().getLong("id_pers");
-
-        return id;
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 
-    public static List<personne> search(String keywords) throws SQLException {
-        Statement stm = null;
+    public static List<PERSONNE> search(String keywords) throws SQLException {
+        CONNECTION conn = new CONNECTION();
         ResultSet Rs;
+        String sql = "Select * From personne Where  CONCAT(nom, prenom, adresse, telephone) LIKE '%' '"+keywords+"' '%'";
 
-        Rs=stm.executeQuery("Select * From personne Where  CONCAT(nom, prenom, adresse, telephone) LIKE '%' '"+keywords+"' '%'");
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
 
-        List<personne> personnes = new ArrayList<>();
+        Rs = ps.executeQuery();
+        
+        List<PERSONNE> personnes = new ArrayList<>();
 
         while (Rs.next())
         {
@@ -172,16 +180,20 @@ public class personne {
     }
 
     public static int delete(long id_pers) throws SQLException {
-        Statement stm = null;
+        
+        CONNECTION conn=new CONNECTION();
+        
+        String sql = "Delete From personne Where id_pers="+id_pers;
 
-        int res = stm.executeUpdate("Delete From personne Where id_pers="+id_pers);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+
+        int res = ps.executeUpdate();
 
         return res;
     }
 
     public static int update(long id_pers, String nom, String prenom, String adresse, String telephone) throws SQLException {
         CONNECTION conn=new CONNECTION();
-        ResultSet Rs;
 
         String sql = "UPDATE personne set nom= '"+nom+"', prenom= '"+prenom+"', adresse= '"+adresse+"', telephone= '"+telephone+"'  WHERE id_pers= "+id_pers;
         PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);

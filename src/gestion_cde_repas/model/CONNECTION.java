@@ -23,7 +23,7 @@ public class CONNECTION {
         
         try
         {
-          conn =DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_commandes_repas","root","");
+          conn =DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_commandes_repas","root","Mysqlp@ssw0rd");
         } 
         catch(SQLException e)
         {
