@@ -2,6 +2,7 @@ package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CLIENT extends PERSONNE {
     private int id_clt;
@@ -26,7 +27,7 @@ public class CLIENT extends PERSONNE {
 
         String sql;
         sql = "insert into client(id_pers) VALUES (?)";
-        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pt.setLong(1,id);
         pt.executeUpdate();

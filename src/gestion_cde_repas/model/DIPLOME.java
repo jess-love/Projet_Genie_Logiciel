@@ -2,6 +2,7 @@ package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DIPLOME {
     private int id_dip;
@@ -35,7 +36,7 @@ public class DIPLOME {
 
         String sql;
         sql = "insert into diplome(id_emp, libelle) VALUES (?,?)";
-        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pt.setLong(1,id_emp);
         pt.setString(2,libelle);

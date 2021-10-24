@@ -99,22 +99,27 @@ public class Famille_boisson {
 
         String sql;
         sql = "insert into famille_boisson(nom_fam_boisson) VALUES (?)";
-        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         ps.setString(1,nom);
 
         int res = ps.executeUpdate();
-
-        long id = ps.getGeneratedKeys().getLong("id_fam_boisson");
-
-        return id;
+        
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
     }
 
     public static int update(long id_fam, String nom) throws SQLException {
         CONNECTION conn=new CONNECTION();
         ResultSet Rs;
 
-        String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom+"'  WHERE id_fam_boisson= = "+id_fam;
+        String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom+"'  WHERE id_fam_boisson = "+id_fam;
         PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
         int res = ps.executeUpdate();
 
@@ -122,9 +127,13 @@ public class Famille_boisson {
     }
 
     public static int delete(long id_fam) throws SQLException {
-        Statement stm = null;
+        CONNECTION conn=new CONNECTION();
+        
+        String sql = "Delete From famille_boisson Where id_fam_boisson="+id_fam;
 
-        int res = stm.executeUpdate("Delete From famille_boisson Where id_fam_boisson="+id_fam);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+
+        int res = ps.executeUpdate();
 
         return res;
     }

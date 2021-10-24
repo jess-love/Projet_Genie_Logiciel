@@ -133,7 +133,7 @@ public class PERSONNE {
 
         String sql;
         sql = "insert into personne(nom, prenom, adresse, telephone) VALUES (?,?,?,?)";
-        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         ps.setString(1,nom);
         ps.setString(2,prenom);
@@ -172,9 +172,14 @@ public class PERSONNE {
     }
 
     public static int delete(long id_pers) throws SQLException {
-        Statement stm = null;
+        
+        CONNECTION conn=new CONNECTION();
+        
+        String sql = "Delete From personne Where id_pers="+id_pers;
 
-        int res = stm.executeUpdate("Delete From personne Where id_pers="+id_pers);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+
+        int res = ps.executeUpdate();
 
         return res;
     }

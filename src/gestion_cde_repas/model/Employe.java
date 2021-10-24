@@ -2,6 +2,7 @@ package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Employe extends PERSONNE{
     private int id_emp;
@@ -36,7 +37,7 @@ public class Employe extends PERSONNE{
 
         String sql;
         sql = "insert into employe(id_pers, poste) VALUES (?,?)";
-        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         ps.setLong(1,id_pers);
         ps.setString(2,poste);

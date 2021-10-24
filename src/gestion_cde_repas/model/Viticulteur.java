@@ -2,6 +2,7 @@ package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Viticulteur {
     private int id_vit;
@@ -21,7 +22,7 @@ public class Viticulteur {
 
         String sql;
         sql = "insert into Viticulteur(id_pers) VALUES (?)";
-        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement pt = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pt.setLong(1,id);
         pt.executeUpdate();
