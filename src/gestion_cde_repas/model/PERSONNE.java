@@ -153,11 +153,14 @@ public class PERSONNE {
     }
 
     public static List<PERSONNE> search(String keywords) throws SQLException {
-        Statement stm = null;
+        CONNECTION conn = new CONNECTION();
         ResultSet Rs;
+        String sql = "Select * From personne Where  CONCAT(nom, prenom, adresse, telephone) LIKE '%' '"+keywords+"' '%'";
 
-        Rs=stm.executeQuery("Select * From personne Where  CONCAT(nom, prenom, adresse, telephone) LIKE '%' '"+keywords+"' '%'");
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
 
+        Rs = ps.executeQuery();
+        
         List<PERSONNE> personnes = new ArrayList<>();
 
         while (Rs.next())
@@ -191,7 +194,6 @@ public class PERSONNE {
 
     public static int update(long id_pers, String nom, String prenom, String adresse, String telephone) throws SQLException {
         CONNECTION conn=new CONNECTION();
-        ResultSet Rs;
 
         String sql = "UPDATE personne set nom= '"+nom+"', prenom= '"+prenom+"', adresse= '"+adresse+"', telephone= '"+telephone+"'  WHERE id_pers= "+id_pers;
         PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);

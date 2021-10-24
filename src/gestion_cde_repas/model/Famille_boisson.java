@@ -120,7 +120,6 @@ public class Famille_boisson {
 
     public static int update(long id_fam, String nom) throws SQLException {
         CONNECTION conn=new CONNECTION();
-        ResultSet Rs;
 
         String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom+"'  WHERE id_fam_boisson = "+id_fam;
         PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
