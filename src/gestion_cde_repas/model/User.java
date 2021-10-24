@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package gestion_cde_repas.model;
-
 import java.awt.HeadlessException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,10 +29,11 @@ public class User {
             String query="Select * From connexion Where username='"+username+"' And password='"+password+"' ";
             PreparedStatement ps = conn.avoirconnection().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                return true;
-            }
-            else return false;
+            return rs.next(); 
+            
+//            if(rs.next()){
+//                return true;
+//            }            
         }
         catch(SQLException | HeadlessException e)
         {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package gestion_cde_repas.model;
 
 import java.sql.PreparedStatement;
@@ -11,10 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author rbens
- */
+
 public class Famille_boisson {
     private int id_fam_boisson;
     private String nom_fam_boisson;
@@ -94,38 +87,43 @@ public class Famille_boisson {
         return famille_boissons;
     }
 
-    public static long insert(String nom) throws SQLException {
+    public static void insert(String nom) throws SQLException {
         CONNECTION conn=new CONNECTION();
 
         String sql;
         sql = "insert into famille_boisson(nom_fam_boisson) VALUES (?)";
-        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         ps.setString(1,nom);
 
         int res = ps.executeUpdate();
 
-        long id = ps.getGeneratedKeys().getLong("id_fam_boisson");
+        //int id = ps.getGeneratedKeys().getInt("id_fam_boisson");
 
-        return id;
+       // return id;
     }
 
-    public static int update(long id_fam, String nom) throws SQLException {
+    public static void update(int id_fam, String nom) throws SQLException {
         CONNECTION conn=new CONNECTION();
-        ResultSet Rs;
+        //ResultSet Rs;
 
         String sql = "UPDATE famille_boisson set nom_fam_boisson= '"+nom+"'  WHERE id_fam_boisson= = "+id_fam;
         PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
-        int res = ps.executeUpdate();
+        ps.executeUpdate();
 
-        return res;
+        ///return res;
     }
 
-    public static int delete(long id_fam) throws SQLException {
-        Statement stm = null;
+    public static void delete(int id_fam) throws SQLException {
+       // Statement stm = null;
+        CONNECTION conn=new CONNECTION();
+        //ResultSet Rs;
 
-        int res = stm.executeUpdate("Delete From famille_boisson Where id_fam_boisson="+id_fam);
-
-        return res;
+        //int res = stm.executeUpdate("Delete From famille_boisson Where id_fam_boisson="+id_fam);
+         
+        String sql = "Delete From famille_boisson Where id_fam_boisson="+id_fam;
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+       // return res;
     }
 }

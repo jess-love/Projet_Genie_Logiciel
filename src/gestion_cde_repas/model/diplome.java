@@ -1,18 +1,17 @@
 package gestion_cde_repas.model;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DIPLOME {
+public class diplome {
     private int id_dip;
     private String lib;
 
-    public DIPLOME(int id_dip, String lib) {
+    public diplome(int id_dip, String lib) {
         this.id_dip = id_dip;
         this.lib = lib;
     }
 
-    public DIPLOME() {  }
+    public diplome() {  }
 
     public int getId_dip() {
         return id_dip;

@@ -1,7 +1,7 @@
 package gestion_cde_repas;
 import gestion_cde_repas.model.CLIENT;
 import gestion_cde_repas.model.CONNECTION;
-import gestion_cde_repas.model.PERSONNE;
+import gestion_cde_repas.model.personne;
 import gestion_cde_repas.model.Viticulteur;
 
 import java.awt.HeadlessException;
@@ -37,7 +37,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
        
         try
         {
-            List<PERSONNE> personnes = PERSONNE.getAllOrderById();
+            List<personne> personnes = personne.getAllOrderById();
 
             personnes.forEach(personne -> {
                 model.addRow(new Object[] {
@@ -67,7 +67,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         {
            model.setRowCount(0);
 
-            List<PERSONNE> personnes = PERSONNE.getAllOrderById();
+            List<personne> personnes = personne.getAllOrderById();
 
             personnes.forEach(personne -> {
                 model.addRow(new Object[] {
@@ -360,7 +360,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
          
             else
                 {
-                    long id_pers = PERSONNE.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
+                    long id_pers = personne.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
                     if(combo.getSelectedItem()=="Client")
                     {
@@ -396,7 +396,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
              if(rech.getText().length()!=0)
         {
             {
-                List<PERSONNE> personnes = PERSONNE.search(rech.getText());
+                List<personne> personnes = personne.search(rech.getText());
 
                 personnes.forEach(personne -> {
                     model.addRow(new Object[] {
@@ -455,7 +455,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             
             {
                 
-                PERSONNE.delete(Long.parseLong(supprimer.getText()));
+                personne.delete(Long.parseLong(supprimer.getText()));
                 affiche();
             }
             
@@ -480,7 +480,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
                 if(JOptionPane.showConfirmDialog(null,"Confirmer la modification", "Modification", JOptionPane.YES_NO_OPTION)== JOptionPane.OK_OPTION)
                 {
-                    int res = PERSONNE.update(Long.parseLong(supprimer.getText()), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
+                    int res = personne.update(Long.parseLong(supprimer.getText()), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
                     affiche();
                 }

@@ -3,7 +3,7 @@ package gestion_cde_repas.model;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CLIENT extends PERSONNE {
+public class CLIENT extends personne {
     private int id_clt;
 
     public CLIENT() { }

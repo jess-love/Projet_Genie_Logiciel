@@ -1,11 +1,9 @@
 package gestion_cde_repas;
 import gestion_cde_repas.model.CONNECTION;
-import gestion_cde_repas.model.DIPLOME;
+import gestion_cde_repas.model.diplome;
 import gestion_cde_repas.model.Employe;
-import gestion_cde_repas.model.PERSONNE;
-
+import gestion_cde_repas.model.personne;
 import java.awt.Toolkit;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,7 +36,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         {
             try
                 {
-                    List<PERSONNE> personnes = PERSONNE.getNames();
+                    List<personne> personnes = personne.getNames();
 
                     personnes.forEach(personne -> {
                         String fullName = personne.getNom() + " " +personne.getPrenom();
@@ -89,12 +87,10 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 0, 153));
         jLabel6.setText("Diplome");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 120, 30));
 
         nom_prenom_emp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         nom_prenom_emp.setForeground(new java.awt.Color(0, 0, 102));
@@ -104,17 +100,14 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                 nom_prenom_empActionPerformed(evt);
             }
         });
-        jPanel1.add(nom_prenom_emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 270, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 0, 153));
         jLabel7.setText("Nom et Prenom");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 120, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 0, 153));
         jLabel8.setText("Poste");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 70, 30));
 
         dip.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dip.setForeground(new java.awt.Color(51, 0, 102));
@@ -129,7 +122,6 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                 dipActionPerformed(evt);
             }
         });
-        jPanel1.add(dip, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 270, 30));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -140,7 +132,6 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 110, 30));
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -151,13 +142,57 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 110, 30));
 
         post.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         post.setForeground(new java.awt.Color(51, 0, 153));
         post.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manager", "Serveur", "Cuisinier", "Securite", " " }));
         post.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 102)));
-        jPanel1.add(post, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 270, 30));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(nom_prenom_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(dip, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nom_prenom_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dip, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 260));
 
@@ -198,7 +233,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                   
             for (int i=0; i<diplome.size(); i++)
             {
-                DIPLOME.insert(id_emp, diplome.get(i).toString());
+                diplome.insert(id_emp, diplome.get(i).toString());
             }
         }
         catch(SQLException e)

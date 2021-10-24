@@ -1,11 +1,8 @@
 package gestion_cde_repas;
-
+import gestion_cde_repas.model.CONNECTION;
 import gestion_cde_repas.model.Famille_boisson;
-import gestion_cde_repas.model.PERSONNE;
-
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,6 +55,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
             });
            nom.setText("");
            rech.setText("");
+           supprimer.setText("");
            
         } catch(HeadlessException e)
         {
@@ -74,12 +72,9 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
     {
         try
         {   
-            
-            nom.setText(model.getValueAt(i,1).toString());
             supprimer.setText(model.getValueAt(i,0).toString());
-    
-             
- 
+            nom.setText(model.getValueAt(i,1).toString());
+
         } 
         catch(Exception e)
         {
@@ -178,7 +173,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 153));
         jLabel5.setText("Nom");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 60, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 40, 30));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -291,7 +286,8 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
 
             else
             {
-                Famille_boisson.insert(nom.getText());
+                 Famille_boisson.insert(nom.getText());
+                
                
                 JOptionPane.showMessageDialog(null,"Cette famille a bien ete ajoute");
                 nom.setText("");
@@ -319,7 +315,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
 
                 if(JOptionPane.showConfirmDialog(null,"Confirmer la modification", "Modification", JOptionPane.YES_NO_OPTION)== JOptionPane.OK_OPTION)
                 {
-                    Famille_boisson.update(Long.parseLong(supprimer.getText()), nom.getText());
+                    Famille_boisson.update(Integer.parseInt(supprimer.getText()), nom.getText());
                     affiche();
                 }
             } }
@@ -340,7 +336,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 if(JOptionPane.showConfirmDialog(null, "Attention! Voulez-vous vraiment supprimer cette famille?", "Suppimer personne", JOptionPane.YES_NO_OPTION)==JOptionPane.OK_OPTION)
 
                 {
-                    Famille_boisson.delete(Long.parseLong(supprimer.getText()));
+                    Famille_boisson.delete(Integer.parseInt(supprimer.getText()));
                     affiche();
                 }
 

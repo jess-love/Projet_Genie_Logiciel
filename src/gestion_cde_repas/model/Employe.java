@@ -3,7 +3,7 @@ package gestion_cde_repas.model;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Employe extends PERSONNE{
+public class Employe extends personne{
     private int id_emp;
     private String poste;
 
