@@ -41,7 +41,7 @@ public class diplome {
         pt.setLong(1,id_emp);
         pt.setString(2,libelle);
 
-        int res = pt.executeUpdate();
+        long res = pt.executeUpdate();
 
         ResultSet generatedKeys = pt.getGeneratedKeys();
         if(generatedKeys.next()){

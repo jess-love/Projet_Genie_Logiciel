@@ -5,17 +5,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Viticulteur {
+public class Viticulteur extends Personne {
     private int id_vit;
 
-    public Viticulteur() { }
+    public Viticulteur(){}
+    
+    public Viticulteur(int id_pers,  String nom, String prenom, String adresse, String telephone, int id_vit)
+    {   
+        super(id_pers, nom, prenom, adresse, telephone);
+        this.id_vit=id_vit;
+    }
 
-    public int getId_clt() {
+    public int getId_Vit() {
         return id_vit;
     }
 
-    public void setId_clt(int id_clt) {
-        this.id_vit = id_clt;
+    public void setId_Vit(int id) {
+        this.id_vit = id;
     }
 
     public static long insert(long id) throws SQLException {

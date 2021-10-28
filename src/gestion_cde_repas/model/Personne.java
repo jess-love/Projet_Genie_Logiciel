@@ -7,12 +7,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class personne {
+public class Personne {
     private int id_pers;
     private String nom, prenom, adresse, telephone;
 
-    public personne(){ }
-    public personne(int id_pers, String nom, String prenom, String adresse, String telephone) {
+    public Personne(){ }
+    public Personne(int id_pers, String nom, String prenom, String adresse, String telephone) {
         this.id_pers = id_pers;
         this.nom = nom;
         this.prenom = prenom;
@@ -60,7 +60,9 @@ public class personne {
         this.telephone = telephone;
     }
 
-    public static List<personne> getAll(){
+    
+    
+    public static List<Personne> getAll(){
         CONNECTION conn=new CONNECTION();
         Statement stm;
         ResultSet Rs;
@@ -70,11 +72,11 @@ public class personne {
             stm=conn.avoirconnection().createStatement();
             Rs = stm.executeQuery("Select * from personne");
 
-            List<personne> personnes = new ArrayList<>();
+            List<Personne> personnes = new ArrayList<>();
 
             while (Rs.next())
             {
-                personne personne = new personne();
+                Personne personne = new Personne();
 
                 personne.setId_pers(Rs.getInt("id_pers"));
                 personne.setNom(Rs.getString("nom"));
@@ -94,7 +96,7 @@ public class personne {
         }
     }
 
-    public static List<personne> getAllOrderById(){
+    public static List<Personne> getAllOrderById(){
         CONNECTION conn=new CONNECTION();
         Statement stm;
         ResultSet Rs;
@@ -104,11 +106,11 @@ public class personne {
             stm=conn.avoirconnection().createStatement();
             Rs = stm.executeQuery("Select * from personne Order by id_pers");
 
-            List<personne> personnes = new ArrayList<>();
+            List<Personne> personnes = new ArrayList<>();
 
             while (Rs.next())
             {
-                personne personne = new personne();
+                Personne personne = new Personne();
 
                 personne.setId_pers(Rs.getInt("id_pers"));
                 personne.setNom(Rs.getString("nom"));
@@ -127,6 +129,8 @@ public class personne {
             return null;
         }
     }
+    
+    
 
     public static long insert(String nom, String prenom, String adresse, String telephone) throws SQLException {
         CONNECTION conn=new CONNECTION();
@@ -152,7 +156,9 @@ public class personne {
         return 0;
     }
 
-    public static List<PERSONNE> search(String keywords) throws SQLException {
+    
+    
+    public static List<Personne> search(String keywords) throws SQLException {
         CONNECTION conn = new CONNECTION();
         ResultSet Rs;
         String sql = "Select * From personne Where  CONCAT(nom, prenom, adresse, telephone) LIKE '%' '"+keywords+"' '%'";
@@ -161,11 +167,11 @@ public class personne {
 
         Rs = ps.executeQuery();
         
-        List<PERSONNE> personnes = new ArrayList<>();
+        List<Personne> personnes = new ArrayList<>();
 
         while (Rs.next())
         {
-            personne personne = new personne();
+            Personne personne = new Personne();
 
             personne.setId_pers(Rs.getInt("id_pers"));
             personne.setNom(Rs.getString("nom"));
@@ -179,6 +185,8 @@ public class personne {
         return personnes;
     }
 
+    
+    
     public static int delete(long id_pers) throws SQLException {
         
         CONNECTION conn=new CONNECTION();
@@ -192,6 +200,8 @@ public class personne {
         return res;
     }
 
+    
+    
     public static int update(long id_pers, String nom, String prenom, String adresse, String telephone) throws SQLException {
         CONNECTION conn=new CONNECTION();
 
@@ -202,18 +212,20 @@ public class personne {
         return res;
     }
 
-    public static List<personne> getNames() throws SQLException {
+    
+    
+    public static List<Personne> getNames() throws SQLException {
         CONNECTION conn=new CONNECTION();
 
-        String mysql="select id_pers, nom, prenom from personne";
+        String mysql="select nom, prenom from personne";
         PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
         ResultSet Rs = pst.executeQuery();
 
-        List<personne> personnes = new ArrayList<>();
+        List<Personne> personnes = new ArrayList<>();
 
         while (Rs.next())
         {
-            personne personne = new personne();
+            Personne personne = new Personne();
 
             personne.setNom(Rs.getString("nom"));
             personne.setPrenom(Rs.getString("prenom"));
@@ -223,4 +235,24 @@ public class personne {
 
         return personnes;
     }
+    
+    
+    
+    
+    
+    
+        public static long getId_particulier(String nom, String prenom) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select id_pers from personne where nom='"+nom+"' and prenom='"+prenom+"' ";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        Rs.next();
+        long id=Rs.getLong("id_pers");
+ 
+        return id;
+    }
+
+
 }

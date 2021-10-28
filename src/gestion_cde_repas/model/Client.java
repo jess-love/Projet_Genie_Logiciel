@@ -5,12 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CLIENT extends personne {
+public class Client extends Personne {
     private int id_clt;
 
-    public CLIENT() { }
+    public Client() { }
 
-    public CLIENT(int id_pers, String nom, String prenom, String adresse, String telephone, int id_clt) {
+    public Client(int id_pers, String nom, String prenom, String adresse, String telephone, int id_clt) {
         super(id_pers, nom, prenom, adresse, telephone);
         this.id_clt = id_clt;
     }

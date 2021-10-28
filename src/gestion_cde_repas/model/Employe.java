@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Employe extends personne{
+public class Employe extends Personne{
     private int id_emp;
     private String poste;
 
@@ -33,6 +33,8 @@ public class Employe extends personne{
         this.poste = poste;
     }
 
+    
+    
     public static long insert(long id_pers, String poste) throws SQLException {
         CONNECTION conn = new CONNECTION();
 

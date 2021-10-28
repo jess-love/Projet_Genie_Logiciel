@@ -2,7 +2,7 @@ package gestion_cde_repas;
 import gestion_cde_repas.model.CONNECTION;
 import gestion_cde_repas.model.diplome;
 import gestion_cde_repas.model.Employe;
-import gestion_cde_repas.model.personne;
+import gestion_cde_repas.model.Personne;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,18 +25,17 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         Fillcombo_2();
     
     }
-    //     private String getWord(String txt)
-    //     {
-    //        int index=txt.indexOf(" ");
-    //        if(index)
-    //     }
+
 
         @SuppressWarnings("unchecked")
+       
+        
+        
         private void Fillcombo_2() //pour reccuperer la famille de l'article dans la table familleart et le mettre dans la liste item
         {
             try
                 {
-                    List<personne> personnes = personne.getNames();
+                    List<Personne> personnes = Personne.getNames();
 
                     personnes.forEach(personne -> {
                         String fullName = personne.getNom() + " " +personne.getPrenom();
@@ -72,6 +71,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         post = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 153));
@@ -148,30 +148,45 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         post.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Manager", "Serveur", "Cuisinier", "Securite", " " }));
         post.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 102)));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 0, 102));
+        jButton1.setText("Retour");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(nom_prenom_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(dip, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(nom_prenom_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(dip, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,13 +203,16 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dip, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 260));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -222,18 +240,18 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         {
             String txt= nom_prenom_emp.getSelectedItem().toString();
             int index=txt.indexOf(" ");                                         //bout sa yo ou a deside si w toujou bzw yo
-            String a= txt.substring(0,index);    System.out.println(a);
-            String b= txt.substring(index+1);    System.out.println(b);
-
-            long id_pers = 76; //(quelconque)  id wap recuperer an, pou moun ki selectionné an
+            String nom= txt.substring(0,index);       
+            String prenom= txt.substring(index+1);    
+            
                 
+            long id_pers = Personne.getId_particulier(nom, prenom); //(quelconque)  id wap recuperer an, pou moun ki selectionné an 
             Long id_emp = Employe.insert(id_pers, post.getSelectedItem().toString());
 
             JOptionPane.showMessageDialog(null,"Cet employe a bien ete ajoute");
                   
-            for (int i=0; i<diplome.size(); i++)
+            for (int i=0; i<diplom.size(); i++)
             {
-                diplome.insert(id_emp, diplome.get(i).toString());
+                diplome.insert(id_emp, diplom.get(i).toString());
             }
         }
         catch(SQLException e)
@@ -247,8 +265,9 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
          try
          {
-             diplome.add(dip.getText());
-             System.out.println(diplome.get(diplome.size()-1));
+             diplom.add(dip.getText());
+             dip.setText("");
+             System.out.println(diplom.get(diplom.size()-1));
          }
          catch(Exception e )
          {
@@ -257,6 +276,13 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+        MENU Info;
+        Info = new MENU();
+        Info.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {
@@ -264,10 +290,11 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
         });
     }
 
-    public static ArrayList diplome= new ArrayList <String> ();
+    public static ArrayList diplom= new ArrayList <String> ();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField dip;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JDialog jDialog1;

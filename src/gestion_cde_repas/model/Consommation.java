@@ -1,11 +1,11 @@
 package gestion_cde_repas.model;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class CONSOMMATION {
+public class Consommation {
     private final SimpleIntegerProperty id_cde, id_menu, id_plat, id_boisson;
    
   
-    public  CONSOMMATION()
+    public  Consommation()
     {
         this.id_cde = new SimpleIntegerProperty();
         this.id_menu = new SimpleIntegerProperty();

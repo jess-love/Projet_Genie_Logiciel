@@ -2,12 +2,12 @@ package gestion_cde_repas.model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class COMMANDE {
+public class Commande {
     private final SimpleIntegerProperty id_cde, id_emp, id_tab;
     private final SimpleStringProperty date;
 
   
-    public  COMMANDE()
+    public  Commande()
     {
         this.id_cde = new SimpleIntegerProperty();
         this.id_emp = new SimpleIntegerProperty();

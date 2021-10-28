@@ -90,7 +90,7 @@ public class Famille_boisson {
         return famille_boissons;
     }
 
-    public static void insert(String nom) throws SQLException {
+    public static long insert(String nom) throws SQLException {
         CONNECTION conn=new CONNECTION();
 
         String sql;
@@ -132,4 +132,31 @@ public class Famille_boisson {
 
         return res;
     }
+    
+    
+    
+    
+                
+        public static List<Famille_boisson> getNames(long id_fam_boisson) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select nom_fam_boisson from famille_boisson";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        List<Famille_boisson> famille_boissons = new ArrayList<>();
+
+        while (Rs.next())
+        {
+            Famille_boisson famille_boisson = new Famille_boisson();
+
+            famille_boisson.setNom_fam_boisson(Rs.getString("nom_fam_boisson"));
+
+            famille_boissons.add( famille_boisson);
+        }
+
+        return famille_boissons;
+    }
+    
+    
 }

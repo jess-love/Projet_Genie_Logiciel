@@ -1,10 +1,10 @@
 package gestion_cde_repas.model;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class BOISSON_MENU {
+public class Boisson_menu {
     private final SimpleIntegerProperty id_boisson, id_menu;
 
-    public  BOISSON_MENU()
+    public  Boisson_menu()
     {
         this.id_boisson = new SimpleIntegerProperty();
         this.id_menu = new SimpleIntegerProperty();

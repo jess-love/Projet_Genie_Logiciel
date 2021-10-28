@@ -1,11 +1,9 @@
 package gestion_cde_repas;
-import gestion_cde_repas.model.CONNECTION;
+//import gestion_cde_repas.model.CONNECTION;
 import gestion_cde_repas.model.Famille_boisson;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
     DefaultTableModel model=new DefaultTableModel();
+  
 
     public GESTION_FAMILLE_BOISSON() {
         initComponents();
@@ -48,7 +47,9 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
             List<Famille_boisson> famille_boissons = Famille_boisson.getAllOrderById();
 
             famille_boissons.forEach(familleBoisson -> {
-                model.addRow(new Object[] { familleBoisson.getId_fam_boisson(), familleBoisson.getNom_fam_boisson() });
+                    model.addRow(new Object[] { 
+                    familleBoisson.getId_fam_boisson(), 
+                    familleBoisson.getNom_fam_boisson() });
             });
            nom.setText("");
            rech.setText("");
@@ -94,6 +95,11 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         supprimer = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,7 +129,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_fam_boisson);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 340, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 430, 240));
 
         rech.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rech.setForeground(new java.awt.Color(51, 0, 102));
@@ -133,7 +139,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 rechActionPerformed(evt);
             }
         });
-        jPanel1.add(rech, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 210, 30));
+        jPanel1.add(rech, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 300, 30));
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -144,7 +150,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 30));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 30));
 
         nom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nom.setForeground(new java.awt.Color(51, 0, 102));
@@ -154,7 +160,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 nomActionPerformed(evt);
             }
         });
-        jPanel1.add(nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 290, -1));
+        jPanel1.add(nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 370, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -165,12 +171,12 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 130, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 370, 30));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 153));
         jLabel5.setText("Nom");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 40, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 40, 30));
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -181,7 +187,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 130, 30));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 100, 30));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -192,7 +198,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 130, 30));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 100, 30));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -203,7 +209,7 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 130, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 100, 30));
 
         supprimer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         supprimer.setForeground(new java.awt.Color(51, 0, 102));
@@ -215,7 +221,29 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         });
         jPanel1.add(supprimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 0, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 380));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 0, 102));
+        jButton1.setText("Retour");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 100, 30));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel1.setText("Famille Boisson");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 190, 50));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 220, 50));
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 240, 50));
+
+        jPanel4.setBackground(new java.awt.Color(186, 186, 186));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 260, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,6 +379,13 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_supprimerActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+        MENU Info;
+        Info = new MENU();
+        Info.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     public static void main(String args[]) {
  
@@ -360,13 +395,18 @@ public class GESTION_FAMILLE_BOISSON extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nom;
     private javax.swing.JTextField rech;

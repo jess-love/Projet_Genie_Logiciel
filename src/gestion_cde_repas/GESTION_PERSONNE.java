@@ -1,12 +1,10 @@
 package gestion_cde_repas;
-import gestion_cde_repas.model.CLIENT;
-import gestion_cde_repas.model.CONNECTION;
-import gestion_cde_repas.model.personne;
+import gestion_cde_repas.model.Client;
+import gestion_cde_repas.model.Personne;
 import gestion_cde_repas.model.Viticulteur;
 
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GESTION_PERSONNE extends javax.swing.JFrame {
     
-    CONNECTION conn=new CONNECTION();
+    
     Statement stm;
     ResultSet Rs;
     DefaultTableModel model=new DefaultTableModel();
@@ -37,7 +35,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
        
         try
         {
-            List<personne> personnes = personne.getAllOrderById();
+            List<Personne> personnes = Personne.getAllOrderById();
 
             personnes.forEach(personne -> {
                 model.addRow(new Object[] {
@@ -67,7 +65,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         {
            model.setRowCount(0);
 
-            List<personne> personnes = personne.getAllOrderById();
+            List<Personne> personnes = Personne.getAllOrderById();
 
             personnes.forEach(personne -> {
                 model.addRow(new Object[] {
@@ -82,6 +80,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                 prenom.setText("");
                 adr.setText("");
                 tlf.setText("");
+                supprimer.setText("");
+                rech.setText("");
             });
 
         } catch(HeadlessException e)
@@ -137,6 +137,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         tlf = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -264,7 +265,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 100, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 270, 110, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 0, 153));
@@ -290,7 +291,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 110, 30));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 110, 30));
 
         tlf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tlf.setForeground(new java.awt.Color(51, 0, 102));
@@ -311,20 +312,24 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 110, 30));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 270, 110, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 320));
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(51, 0, 102));
+        jButton7.setText("Retour");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 110, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
-        try
-        {
-             
-        }
-        catch(Exception e)
-        {System.err.println(e);}
 
         
     }//GEN-LAST:event_comboActionPerformed
@@ -360,11 +365,11 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
          
             else
                 {
-                    long id_pers = personne.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
+                    long id_pers = Personne.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
                     if(combo.getSelectedItem()=="Client")
                     {
-                        CLIENT.insert(id_pers);
+                        Client.insert(id_pers);
                     }
                     else if(combo.getSelectedItem()=="Viticulteur")
                     {
@@ -396,7 +401,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
              if(rech.getText().length()!=0)
         {
             {
-                List<personne> personnes = personne.search(rech.getText());
+                List<Personne> personnes = Personne.search(rech.getText());
 
                 personnes.forEach(personne -> {
                     model.addRow(new Object[] {
@@ -425,7 +430,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
              
             else
             {
-                JOptionPane.showMessageDialog(null,"Veuiller remplir le champs en-dessous du bouton rechercher avec le nom de l'article que vous voulez rechercher SVP!!!");
+                JOptionPane.showMessageDialog(null,"Veuiller remplir le champs a cote du bouton rechercher avec le nom de l'article que vous voulez rechercher SVP!!!");
                 affiche();
             }
            
@@ -455,7 +460,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
             
             {
                 
-                personne.delete(Long.parseLong(supprimer.getText()));
+                Personne.delete(Long.parseLong(supprimer.getText()));
                 affiche();
             }
             
@@ -480,7 +485,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
                 if(JOptionPane.showConfirmDialog(null,"Confirmer la modification", "Modification", JOptionPane.YES_NO_OPTION)== JOptionPane.OK_OPTION)
                 {
-                    int res = personne.update(Long.parseLong(supprimer.getText()), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
+                    int res = Personne.update(Long.parseLong(supprimer.getText()), nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
                     affiche();
                 }
@@ -496,6 +501,13 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         affiche();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        setVisible(false);
+        MENU Info;
+        Info = new MENU();
+        Info.setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     public static void main(String args[]) {
       
@@ -507,11 +519,13 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adr;
     private javax.swing.JComboBox<String> combo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
