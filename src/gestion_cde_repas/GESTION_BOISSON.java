@@ -61,7 +61,7 @@ public class GESTION_BOISSON extends javax.swing.JFrame {
         {
             try
                 {
-                    List<Boisson> boissons = Boisson.getNames_Boisson();
+                    List<Boisson> boissons = Boisson.getNames_Fam_Boisson();
                     
                     boissons.forEach(boisson -> { 
                         String FamBoissonName = boisson.getNom_fam_boisson();

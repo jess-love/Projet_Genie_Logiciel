@@ -15,14 +15,15 @@ public class Boisson  {
     }
     
     private int id_boisson, id_fam_boisson;
-    private String designation, nom_fam_boisson;
+    private String designation, nom_fam_boisson, nom_menu;
     private double prix;
   
     public  Boisson(){ }
 
-        public Boisson(int id_boisson, int id_fam_boisson, String nom_fam_boisson,  String designation, double prix) {
+        public Boisson(int id_boisson, int id_fam_boisson, String nom_fam_boisson, String nom_menu, String designation, double prix) {
         
         this.id_boisson = id_boisson;
+        this.id_fam_boisson = id_fam_boisson;
         this.id_fam_boisson = id_fam_boisson;
         this.designation = designation;
         this.prix = prix;
@@ -75,7 +76,17 @@ public void setId_boisson(int id_boisson) {
         public void setNom_fam_boisson(String nom_fam_boisson ) {
         this.nom_fam_boisson= nom_fam_boisson;
     }
+      
         
+        
+            
+        public String getNom_Menu() {
+        return nom_menu;
+    }
+        
+        public void setNom_Menu(String nom_menu ) {
+        this.nom_menu= nom_menu;
+    }
         
         
 
@@ -184,6 +195,32 @@ public void setId_boisson(int id_boisson) {
         return 0;
     }
         
+        
+        
+        //*********************************************************************************************************
+        public static long insert_boisson_menu(long id_boisson, long id_menu) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String sql;
+        sql = "insert into boisson_menu(id_boisson, id_menu) VALUES (?,?)";
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setLong(1,id_boisson);
+        ps.setLong(2,id_menu);
+      
+
+        int res = ps.executeUpdate();
+
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
+        
+        return 0;
+    }
+        
      
                
         public static List<Boisson> search_boisson(String keywords) throws SQLException {
@@ -229,6 +266,20 @@ public void setId_boisson(int id_boisson) {
  
         return id;
     }
+        
+        //***************************************************************************************************
+        public static long getId_particulier_boisson(String designation) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select id_boisson from boisson where designation='"+designation+"'  ";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        Rs.next();
+        long id=Rs.getLong("id_boisson");
+ 
+        return id;
+    }
                  
          
 
@@ -260,10 +311,10 @@ public void setId_boisson(int id_boisson) {
         
      
         
-        public static List<Boisson> getNames_Boisson() throws SQLException {
+        public static List<Boisson> getNames_Fam_Boisson() throws SQLException {
         CONNECTION conn=new CONNECTION();
 
-        String mysql="select  nom_fam_boisson from famille_boisson";
+        String mysql="select  * from famille_boisson";
         PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
         ResultSet Rs = pst.executeQuery();
 
@@ -280,5 +331,85 @@ public void setId_boisson(int id_boisson) {
 
         return boissons;
     }
+        
+        //*************************************************************************
+        
+        public static List<Boisson> getNames_Boisson() throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select * from boisson";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        List<Boisson> boissons = new ArrayList<>();
+
+        while (Rs.next())
+        {
+            Boisson boisson = new Boisson();
+
+            boisson.setDesignation(Rs.getString("designation"));
+         
+            boissons.add(boisson);
+        }
+
+        return boissons;
+    }
+        
+        
+        
+        
+        
+        
+        public static List<Boisson> getNames_Boisson_Per_Famille(String famibwason) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String requete=" Select id_fam_boisson From famille_boisson Where nom_fam_boisson= '"+famibwason+"' " ;
+        PreparedStatement psy = conn.avoirconnection().prepareStatement(requete);
+        ResultSet rst = psy.executeQuery(); 
+        rst.next();
+        int idfam=  rst.getInt("id_fam_boisson");  
+        String sql=" select designation, id_boisson From boisson Where id_fam_boisson='"+idfam+"' "; 
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        List<Boisson> boissons = new ArrayList<>();
+
+        while (rs.next())
+        {
+            Boisson boisson = new Boisson();
+
+            boisson.setDesignation(rs.getString("designation"));
+            boisson.setId_boisson(rs.getInt("id_boisson"));
+         
+            boissons.add(boisson);
+        }
+
+        return boissons;
+    }
+        
+        
+        
+      
+        
+         
+        public static long getList_Id_Boisson(String designation) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select id_boisson from boisson where designation=" +designation;
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+
+        Rs.next();
+        long id=Rs.getInt("id_boisson");
+  
+
+        return id;
+    }
+        
+        
+        
+        
+
             
 }

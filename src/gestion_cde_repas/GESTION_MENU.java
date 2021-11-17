@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GESTION_MENU extends javax.swing.JFrame {
     DefaultTableModel model=new DefaultTableModel();
-    private static long id_dernier_menu;
+    public static long id_dernier_menu;
 
     public GESTION_MENU() {
         initComponents();

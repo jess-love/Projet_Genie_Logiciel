@@ -4,16 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class diplome {
+public class Diplome {
     private int id_dip;
     private String lib;
 
-    public diplome(int id_dip, String lib) {
+    public Diplome(int id_dip, String lib) {
         this.id_dip = id_dip;
         this.lib = lib;
     }
 
-    public diplome() {  }
+    public Diplome() {  }
 
     public int getId_dip() {
         return id_dip;

@@ -1,6 +1,6 @@
 package gestion_cde_repas;
 import gestion_cde_repas.model.CONNECTION;
-import gestion_cde_repas.model.diplome;
+import gestion_cde_repas.model.Diplome;
 import gestion_cde_repas.model.Employe;
 import gestion_cde_repas.model.Personne;
 import java.awt.Toolkit;
@@ -251,7 +251,7 @@ public class GESTION_EMPLOYE extends javax.swing.JFrame {
                   
             for (int i=0; i<diplom.size(); i++)
             {
-                diplome.insert(id_emp, diplom.get(i).toString());
+                Diplome.insert(id_emp, diplom.get(i).toString());
             }
         }
         catch(SQLException e)
