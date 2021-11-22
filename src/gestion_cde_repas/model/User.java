@@ -26,7 +26,7 @@ public class User {
         CONNECTION conn=new CONNECTION();
         
         try{
-            String query="Select * From connexion Where username='"+username+"' And password='"+password+"' ";
+            String query="Select * From employe Where username='"+username+"' And password='"+password+"' ";
             PreparedStatement ps = conn.avoirconnection().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             return rs.next(); 

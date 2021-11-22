@@ -128,8 +128,34 @@ public class Plat {
 
         
         
+        public static long insert_plat_menu(long id_plat, long id_menu) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String sql;
+        sql = "insert into plat_menu(id_plat, id_menu) VALUES (?,?)";
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setLong(1,id_plat);
+        ps.setLong(2,id_menu);
+      
+
+        int res = ps.executeUpdate();
+
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if(generatedKeys.next()){
+            long id = generatedKeys.getLong(1);
+            
+            return id;
+        }
         
-         public static List<Plat> search(String keywords) throws SQLException {
+        return 0;
+    }
+        
+        
+        
+        
+        
+        public static List<Plat> search(String keywords) throws SQLException {
         CONNECTION conn = new CONNECTION();
         ResultSet Rs;
         String sql = "Select id_plat, nom_categorie, nom_plat, prix From plat, categorie Where plat.id_categorie=categorie.id_categorie and CONCAT(nom_plat, nom_categorie, prix) LIKE '%' '"+keywords+"' '%'";
@@ -160,7 +186,7 @@ public class Plat {
          
          
          
-          public static int delete(long id_plat) throws SQLException {
+        public static int delete(long id_plat) throws SQLException {
         
         CONNECTION conn=new CONNECTION();
         
@@ -175,7 +201,7 @@ public class Plat {
 
     
     
-    public static int update(long id_plat, String nom_plat, double prix) throws SQLException {
+        public static int update(long id_plat, String nom_plat, double prix) throws SQLException {
         CONNECTION conn=new CONNECTION();
 
         String sql = "UPDATE plat set  nom_plat= '"+nom_plat+"',  prix= '"+prix+"'  WHERE id_plat= "+id_plat;
@@ -187,7 +213,7 @@ public class Plat {
 
     
     
-    public static List<Plat> getNames() throws SQLException {
+        public static List<Plat> getNames() throws SQLException {
         CONNECTION conn=new CONNECTION();
 
         String mysql="select nom_categorie from categorie";
@@ -226,6 +252,88 @@ public class Plat {
  
         return id;
     }
+        
+    
+        
+        
+        public static List<Plat> getNames_Categorie() throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select  * from categorie";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        List<Plat> plats = new ArrayList<>();
+
+        while (Rs.next())
+        {
+            Plat plat = new Plat();
+
+            plat.setNom_Categorie(Rs.getString("nom_categorie"));
+         
+            plats.add(plat);
+        }
+
+        return plats;
+    }
+        
+        //*************************************************************************
+        
+        public static List<Plat> getNames_Plat() throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String mysql="select * from plat";
+        PreparedStatement pst = conn.avoirconnection().prepareStatement(mysql);
+        ResultSet Rs = pst.executeQuery();
+
+        List<Plat> plats = new ArrayList<>();
+
+        while (Rs.next())
+        {
+            Plat plat = new Plat();
+
+            plat.setNom_Plat(Rs.getString("nom_plat"));
+         
+            plats.add(plat);
+        }
+
+        return plats;
+    }
+        
+        
+        
+        
+        
+        
+        public static List<Plat> getNames_Plat_Per_Categorie(String nom_categorie) throws SQLException {
+        CONNECTION conn=new CONNECTION();
+
+        String requete=" Select id_categorie From categorie Where nom_categorie= '"+nom_categorie+"' " ;
+        PreparedStatement psy = conn.avoirconnection().prepareStatement(requete);
+        ResultSet rst = psy.executeQuery(); 
+        rst.next();
+        int idcat=  rst.getInt("id_categorie");  
+        String sql=" select nom_plat, id_plat From plat Where id_categorie='"+idcat+"' "; 
+        PreparedStatement ps = conn.avoirconnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        List<Plat> plats = new ArrayList<>();
+
+        while (rs.next())
+        {
+            Plat plat = new Plat();
+
+            plat.setNom_Plat(rs.getString("nom_plat"));
+            plat.setId_Plat(rs.getInt("id_plat"));
+         
+            plats.add(plat);
+        }
+
+        return plats;
+    }
+        
+        
+        
         
         
 }

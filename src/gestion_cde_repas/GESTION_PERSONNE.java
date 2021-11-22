@@ -146,8 +146,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         combo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        combo.setForeground(new java.awt.Color(0, 0, 102));
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Client", "Viticulteur" }));
+        combo.setForeground(new java.awt.Color(127, 19, 19));
+        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employe", "Viticulteur" }));
         combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboActionPerformed(evt);
@@ -157,7 +157,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(153, 255, 255), null, new java.awt.Color(102, 255, 255)));
 
-        tab_pers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 0, 204), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 0, 204), new java.awt.Color(51, 204, 255)));
+        tab_pers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(127, 19, 19), new java.awt.Color(255, 153, 153), new java.awt.Color(127, 19, 19), new java.awt.Color(255, 153, 153)));
         tab_pers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -180,23 +180,26 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 580, 180));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel1.setForeground(new java.awt.Color(127, 19, 19));
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\phone1.png")); // NOI18N
         jLabel1.setText("Telephone");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 100, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 120, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel3.setForeground(new java.awt.Color(127, 19, 19));
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\nom.png")); // NOI18N
         jLabel3.setText("Prenom");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 100, 40));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel4.setForeground(new java.awt.Color(127, 19, 19));
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\adresse.png")); // NOI18N
         jLabel4.setText("Adresse");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 100, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 100, 40));
 
         rech.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rech.setForeground(new java.awt.Color(51, 0, 102));
-        rech.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 0, 102), new java.awt.Color(0, 153, 255), new java.awt.Color(51, 0, 102)));
+        rech.setForeground(new java.awt.Color(127, 19, 19));
+        rech.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 153), new java.awt.Color(154, 42, 48), new java.awt.Color(255, 153, 153), new java.awt.Color(154, 42, 48)));
         rech.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rechActionPerformed(evt);
@@ -205,8 +208,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         jPanel1.add(rech, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 430, 30));
 
         prenom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        prenom.setForeground(new java.awt.Color(51, 0, 102));
-        prenom.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 153), new java.awt.Color(51, 0, 153), null));
+        prenom.setForeground(new java.awt.Color(127, 19, 19));
+        prenom.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(154, 42, 48), new java.awt.Color(154, 42, 48), null));
         prenom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prenomActionPerformed(evt);
@@ -215,8 +218,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         jPanel1.add(prenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 200, -1));
 
         adr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        adr.setForeground(new java.awt.Color(51, 0, 102));
-        adr.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 153), new java.awt.Color(51, 0, 153), null));
+        adr.setForeground(new java.awt.Color(127, 19, 19));
+        adr.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(154, 42, 48), new java.awt.Color(154, 42, 48), null));
         adr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adrActionPerformed(evt);
@@ -236,8 +239,9 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 0, 102));
-        jButton2.setText("Ajouter");
+        jButton2.setForeground(new java.awt.Color(127, 19, 19));
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\check.png")); // NOI18N
+        jButton2.setText("Valider");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -247,7 +251,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(51, 0, 102));
+        jButton4.setForeground(new java.awt.Color(127, 19, 19));
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\rechercher.png")); // NOI18N
         jButton4.setText("Rechercher");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,23 +263,25 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 0, 102));
+        jButton3.setForeground(new java.awt.Color(127, 19, 19));
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\supprimer.png")); // NOI18N
         jButton3.setText("Supprimer");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 270, 110, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 270, 130, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel5.setForeground(new java.awt.Color(127, 19, 19));
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\nom.png")); // NOI18N
         jLabel5.setText("Nom");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 40));
 
         nom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nom.setForeground(new java.awt.Color(51, 0, 102));
-        nom.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 153), new java.awt.Color(51, 0, 153), null));
+        nom.setForeground(new java.awt.Color(127, 19, 19));
+        nom.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(154, 42, 48), new java.awt.Color(154, 42, 48), null));
         nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomActionPerformed(evt);
@@ -284,7 +291,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(51, 0, 102));
+        jButton5.setForeground(new java.awt.Color(127, 19, 19));
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\upcoming-work.png")); // NOI18N
         jButton5.setText("Modifier");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,8 +302,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 110, 30));
 
         tlf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tlf.setForeground(new java.awt.Color(51, 0, 102));
-        tlf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(51, 0, 153), new java.awt.Color(51, 0, 153), null));
+        tlf.setForeground(new java.awt.Color(127, 19, 19));
+        tlf.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(154, 42, 48), new java.awt.Color(154, 42, 48), null));
         tlf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tlfActionPerformed(evt);
@@ -305,7 +313,8 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(51, 0, 102));
+        jButton6.setForeground(new java.awt.Color(127, 19, 19));
+        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\refresh.png")); // NOI18N
         jButton6.setText("Actualiser");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,8 +323,10 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
         });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 270, 110, 30));
 
+        jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(51, 0, 102));
+        jButton7.setForeground(new java.awt.Color(127, 19, 19));
+        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\home.png")); // NOI18N
         jButton7.setText("Retour");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,11 +378,7 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
                 {
                     long id_pers = Personne.insert(nom.getText(), prenom.getText(), adr.getText(), tlf.getText());
 
-                    if(combo.getSelectedItem()=="Client")
-                    {
-                        Client.insert(id_pers);
-                    }
-                    else if(combo.getSelectedItem()=="Viticulteur")
+                    if(combo.getSelectedItem()=="Viticulteur")
                     {
                         Viticulteur.insert(id_pers);
                     }
@@ -519,7 +526,6 @@ public class GESTION_PERSONNE extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adr;
     private javax.swing.JComboBox<String> combo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

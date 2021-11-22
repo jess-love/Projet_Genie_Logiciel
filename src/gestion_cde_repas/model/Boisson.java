@@ -24,7 +24,7 @@ public class Boisson  {
         
         this.id_boisson = id_boisson;
         this.id_fam_boisson = id_fam_boisson;
-        this.id_fam_boisson = id_fam_boisson;
+        this.nom_menu = nom_menu;
         this.designation = designation;
         this.prix = prix;
         this.nom_fam_boisson = nom_fam_boisson;

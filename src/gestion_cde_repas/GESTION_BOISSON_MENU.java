@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
     DefaultTableModel model=new DefaultTableModel();
     List<String> list=new ArrayList<String>();
-    List<long[]> list_id_boisson=new ArrayList<long[]>();
+
  
 
     public GESTION_BOISSON_MENU() {
@@ -58,14 +58,6 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
     
         
 
-        
-        
-
-
-        
-        
-       
-   
         
     }
 
@@ -137,7 +129,23 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
 
       
 
-      
+        private void deplace(int i)
+                
+    {
+        try
+        {   
+           
+            nom_boisson.setSelectedItem(model.getValueAt(i,0).toString());
+            
+            
+        } 
+        catch(Exception e)
+        {
+            System.err.println(e);
+            JOptionPane.showMessageDialog(null,"erreur de deplacement"+e.getLocalizedMessage());
+        }
+    }
+    
       
       
       
@@ -156,6 +164,8 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nom_fam_boisson = new javax.swing.JComboBox<>();
         ajouter = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -165,7 +175,8 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
 
         valider.setBackground(new java.awt.Color(255, 255, 255));
         valider.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        valider.setForeground(new java.awt.Color(51, 0, 102));
+        valider.setForeground(new java.awt.Color(127, 19, 19));
+        valider.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\check.png")); // NOI18N
         valider.setText("Valider");
         valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,10 +186,11 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
         jPanel1.add(valider, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 200, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel2.setForeground(new java.awt.Color(127, 19, 19));
         jLabel2.setText("Famille boisson");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
 
+        nom_boisson.setForeground(new java.awt.Color(127, 19, 19));
         nom_boisson.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 nom_boissonMouseClicked(evt);
@@ -199,13 +211,13 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
         jPanel1.add(nom_boisson, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 200, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel4.setForeground(new java.awt.Color(127, 19, 19));
         jLabel4.setText("Nom boisson");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(153, 255, 255), null, new java.awt.Color(102, 255, 255)));
 
-        tab_boisson_menu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 0, 204), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 0, 204), new java.awt.Color(51, 204, 255)));
+        tab_boisson_menu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 102, 102), new java.awt.Color(127, 19, 19), new java.awt.Color(255, 102, 102), new java.awt.Color(127, 19, 19)));
         tab_boisson_menu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -233,18 +245,20 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_boisson_menu);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 340, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 340, 150));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 0, 153));
+        jLabel1.setForeground(new java.awt.Color(127, 19, 19));
         jLabel1.setText("Menu Boisson");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 260, -1));
 
+        nom_fam_boisson.setForeground(new java.awt.Color(127, 19, 19));
         jPanel1.add(nom_fam_boisson, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 200, 30));
 
         ajouter.setBackground(new java.awt.Color(255, 255, 255));
         ajouter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ajouter.setForeground(new java.awt.Color(51, 0, 102));
+        ajouter.setForeground(new java.awt.Color(127, 19, 19));
+        ajouter.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\plus.png")); // NOI18N
         ajouter.setText("Ajouter");
         ajouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +266,30 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ajouter, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, 30));
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(127, 19, 19));
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\supprimer.png")); // NOI18N
+        jButton3.setText("Supprimer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 200, 30));
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(127, 19, 19));
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Getro_BUISSERETH\\Documents\\NetBeansProjects\\GESTION_CDE_REPAS\\img\\home.png")); // NOI18N
+        jButton2.setText("Retour");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 110, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 540));
 
@@ -271,15 +309,26 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
             for (int i=0; i<list.size(); i++)
             {
                 
-            try {
+            try 
+            {
                 String txt= list.get(i);
                 String id = txt.substring(txt.indexOf("(")+1,txt.indexOf(")"));
                 long id_b= Long.parseLong(id);
                 
                 System.out.println(id_b);
-                long id_menu= GESTION_MENU.id_dernier_menu;
-                long id_not_used= Boisson.insert_boisson_menu(id_b, id_menu);
-            } catch (SQLException ex) {
+                long id_menu_1= GESTION_MENU.id_dernier_menu;
+                long id_menu_2=GESTION_MENU.id_menu;
+                if(id_menu_1 !=0 )
+                {
+                long id_not_used= Boisson.insert_boisson_menu(id_b, id_menu_1);
+                }
+                else
+                {
+                     long id_not_used= Boisson.insert_boisson_menu(id_b, id_menu_2);
+                }
+            } 
+            catch (SQLException ex) 
+            {
                 Logger.getLogger(GESTION_BOISSON_MENU.class.getName()).log(Level.SEVERE, null, ex);
             }
                 
@@ -296,12 +345,11 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
     private void tab_boisson_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_boisson_menuMouseClicked
         int i;
         i = tab_boisson_menu.getSelectedRow();
-       // deplace(i);
+        deplace(i);
     }//GEN-LAST:event_tab_boisson_menuMouseClicked
 
     private void ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterActionPerformed
- 
-        //     System.out.println(list.get(list.size()-1));  
+
 
 
     }//GEN-LAST:event_ajouterActionPerformed
@@ -328,6 +376,24 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nom_boissonMouseExited
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    
+            // vérifier d'abord la ligne sélectionnée
+            if(tab_boisson_menu.getSelectedRow() != -1) 
+            {
+               // supprimer la ligne sélectionnée du modèle de table
+               model.removeRow(tab_boisson_menu.getSelectedRow());
+               JOptionPane.showMessageDialog(null, "Suppression terminee");
+            }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
+        GESTION_MENU Info;
+        Info = new GESTION_MENU();
+        Info.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
  
     public static void main(String args[]) {
 
@@ -339,6 +405,8 @@ public class GESTION_BOISSON_MENU extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajouter;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
